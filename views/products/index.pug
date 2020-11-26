@@ -1,0 +1,36 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+    a(href="/products/create") New product
+
+    form(action="/products/search", method="GET", class="d-flex")
+        input(type="text", name="q", class="form-control mr-sm-2" placeholder="Search")
+        button.btn.btn-primary Search
+    h1 Products
+    .row
+      each product in products
+        .col-sm-6.col-md-4.col-lg-3
+          .card.mb-3
+            img.card-img-top(src=product.image)
+            .card-body
+              h5.card-title=product.name
+              p.card-text=product.description
+              a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart
+    .container
+      nav(aria-label='Page navigation').d-flex.justify-content-center
+        ul.pagination
+          - var page = 1;
+            li.page-item
+              a.page-link(href='/products/?page='+ parseInt(page - 1)) Previous
+            li.page-item
+              a.page-link(href='/products/?page='+ parseInt(page)) #{page}
+            li.page-item
+              a.page-link(href='/products/?page='+ parseInt(page + 1)) #{page + 1}
+            li.page-item
+              a.page-link(href='/products/?page='+ parseInt(page + 2)) #{page + 2}
+            li.page-item
+              a.page-link(href='/products/?page='+ parseInt(page + 1)) Next
+
+    
+

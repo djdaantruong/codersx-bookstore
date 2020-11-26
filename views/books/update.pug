@@ -1,0 +1,22 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+  a(href="/books/see" style='text-decoration: none;') Back
+  h3 Update Title
+  form(action="/books/update", method="POST")
+    .form-group.row
+      lable.col-sm-2.col-form-label Title
+      .col-sm-10
+        input.form-control(type="hidden", name="id", value=id)
+        input.form-control(type="text", name="title")
+    .form-group.row
+      label.col-sm-2.col-form-label Description
+      .col-sm-10
+        input.form-control(type="hidden", name="id", value=id)
+        input.form-control(type="text", name="description")
+    .form-group.row
+      label(for='cover').col-sm-2.col-form-label Cover
+      .col-sm-10
+        input#cover.form-control(type="file", name="cover")
+    button.btn.btn-primary Update

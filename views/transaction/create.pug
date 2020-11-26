@@ -1,0 +1,17 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+  a(href="/transaction/seeTransaction" style='text-decoration: none;') Back
+  h3 Create a new Transaction
+  form(action="/transaction/create", method="POST")
+    label(for="users") Choose A User:
+    select.form-control.mb-3(id="user", name="userId")
+      each user in users
+        option(value=user.id)=user.name
+    label(for="books") Choose A Book:
+    select.form-control(id="book", name="bookId")
+      each book in books
+        option(value=book.id)=book.title
+    br
+    button.btn.btn-primary Create

@@ -1,0 +1,19 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+  a(href="/users/seeUser" style='text-decoration: none;') Back
+  h3 Update User
+  form(action="/users/update", method="POST")
+    .form-group
+      lable New Name:
+      .col-sm-10
+        input.form-control(type="hidden", name="id", value=id)
+        input.form-control(type="text", name="name")
+    .form-group
+      lable New Phone:
+      .col-sm-10
+        input.form-control(type="hidden", name="id", value=id)
+        input.form-control(type="text", name="phone")
+        
+    button.btn.btn-success Update

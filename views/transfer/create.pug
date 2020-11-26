@@ -1,0 +1,18 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+    h1 New Transfer
+
+    form(method="POST")
+        input(type="hidden", name="_csrf", value=csrfToken)
+
+        .form-group.row
+            label(for='account').col-sm-2.col-form-label Account
+            .col-sm-10
+               input#account.form-control(name="accountId", type="text")
+        .form-group.row
+            label(for='amount').col-sm-2.col-form-label Amount
+            .col-sm-10
+               input#amount.form-control(name="amount", type="number")
+        button.btn.btn-primary Transfer
