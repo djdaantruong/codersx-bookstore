@@ -1,0 +1,26 @@
+extends ./layouts/common
+block nav
+  include ./layouts/nav
+block content
+  .container
+    h1 Welcome to My Library
+    .row
+      .col.m-auto
+        img(src="https://cdn.glitch.com/a23ddda6-fe7c-4108-875a-7615d7051371%2F3606885.jpg?v=1604910230350", style="width: 25rem;")
+      .col.m-auto
+        h3.py-3 Login
+          if errors
+           each error in errors
+            .alert.alert-danger= error
+
+        form(action="/auth/loginUser", method="POST")
+          .form-group.row
+            label(for='email').col-sm-2.col-form-label Email
+            .col-sm-10
+              input#email.form-control(name="email", type="text", value=values ? values.email : "")
+          .form-group.row
+            label(for='password').col-sm-2.col-form-label Password
+            .col-sm-10
+              input#password.form-control(name="password", type="password", value=values ? values.password : "")
+          button.btn.btn-primary Login
+          

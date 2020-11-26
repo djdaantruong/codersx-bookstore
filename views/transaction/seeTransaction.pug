@@ -1,0 +1,24 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+  a(href="/transaction/create" style="text-decoration: none;") Create a new Transaction
+  h1.py-3 Transactions List
+  form(action="/transaction/search", method="GET", class="d-flex")
+    input(type="text", name="q", class="form-control mr-sm-2" placeholder="Search")
+    button.btn.btn-primary Search
+  table.table
+    thead.thead-light
+      tr
+        th(scope="col") Content
+        th(scope="col") Status
+    tbody
+    each transaction in transactions 
+      tr
+        td=transaction.content
+        td
+          if !transaction.isComplete
+            a(href=`/transaction/${transaction.id}/complete` style="text-decoration: none;") Complete
+          else
+            span(style="color: #269b92") Completed
+  a(href="/" style="text-decoration: none;") Back

@@ -1,0 +1,36 @@
+nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+  .container
+    a.navbar-brand(href='/')
+      img(src="https://cdn.glitch.com/375cd5ac-f9b9-440e-85ea-d48ffee0397d%2FLogobook.png?v=1589900836005", style="width: 2rem;")
+    a.navbar-brand(href='/') Books App
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.ml-auto
+        li
+          if user
+            img.border.border-secondary.rounded-circle.mr-2(src=user.avatarUrl, alt='avatar', width='32')
+            a.font-weight-bold(href='/profile/' + user.id, style="text-decoration: none; color: #fff")= user.name
+        li.nav-item
+          a.nav-link(href='/books/see') Books
+        li.nav-item
+          a.nav-link(href='/users/seeUser') User
+        li.nav-item
+          a.nav-link(href='/transaction/seeTransaction') Transactions
+        li.nav-item
+          a.nav-link(href='/cart') Cart
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            | Profile
+          .dropdown-menu(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='/books/see') Books
+            a.dropdown-item(href='/users/seeUser') User
+            a.dropdown-item(href='/transaction/seeTransaction') Transactions
+            a.dropdown-item(href='/products/') Products
+            a.dropdown-item(href='/transfer/create') Transfer
+            .dropdown-divider
+            a.dropdown-item(href='auth/loginUser') Login
+            a.dropdown-item(href='#') Logout
+      
+          
+      

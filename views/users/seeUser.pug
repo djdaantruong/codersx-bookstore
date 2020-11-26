@@ -1,0 +1,32 @@
+extends ../layouts/common
+block nav
+  include ../layouts/nav
+block content
+  a(href="/users/addUser" style="text-decoration: none;") Create a new User
+  h1 Users List
+  form(action="/users/search", method="GET", class="d-flex")
+    input(type="text", name="q", class="form-control mr-sm-2" placeholder="Search")
+    button.btn.btn-primary Search
+  table.table
+    thead.thead-light
+      tr
+        th(scope='col') Avatar
+        th(scope='col') User Name
+        th(scope='col') Phone
+        th.text-center(colspan="2") Action
+    tbody
+      each user in users
+        tr
+          td
+            if user.avatarUrl
+              img.border.border-secondary.rounded-circle.mr-2(src= user.avatarUrl width="32" height="32")
+            else
+              img.border.border-secondary.rounded-circle.mr-2(src="https://res.cloudinary.com/dgp8yjtbi/image/upload/v1604846973/tl4dmqn8fbbcreimjtn3.jpg" width="32" height="32")
+          td= user.name
+          td= user.phone
+          td.text-center
+            a(href="/users/" + user.id + "/update" style="text-decoration: none; color:#269b92") Update
+          td.text-center
+            a(href="/users/" + user.id + "/delete" style="text-decoration: none;") Delete
+            
+  a(href="/" style='text-decoration: none;') Back
