@@ -1,3 +1,5 @@
+require('dotenv').config(); 
+
 var Book = require("../models/book.model");
 var Session = require("../models/session.model");
 var User = require("../models/user.model");
@@ -38,19 +40,23 @@ module.exports.getAdd = (req, res) => {
 };
 
 module.exports.postAdd = async (req, res) => {
-  if (!req.file) {
-    var result = await cloudinary.uploader.upload(
-      "https://res.cloudinary.com/dgp8yjtbi/image/upload/v1604846973/tl4dmqn8fbbcreimjtn3.jpg"
-    );
-    req.body.coverUrl = result.url;
-  } else {
+  // chỗ này nếu không check lỡ người dùng họ không chọn file ảnh thì sao em
+  // terminal đâu e , start app lên giùm a , trùng port 
+  //vẫn chạy được anh, có nghĩa là có 1 nơi nào đó nó đang run app, a cần e tắt chỗ đó đi 
+  //để em kiểm tra lại
+  // lúc nãy e run ở đâu rồi , 
+  // em thiếu cái enctype="multipart/form-data" nên req.file bị undefined 
+  //ra em quên, thanks anh nhé , hông coá giề :D 
+  if (req.file) {
     var result = await cloudinary.uploader.upload(req.file.path);
     req.body.coverUrl = result.url;
   }
-  
-  await Book.insertMany([req.body]);
-  Book.save;
-  
+
+  // console.log(req.file)
+  // debugger;
+
+  await Book.create(req.body);
+
   res.redirect("/books/see");
 };
 

@@ -9,6 +9,7 @@ block content
         img(src="https://cdn.glitch.com/a23ddda6-fe7c-4108-875a-7615d7051371%2F3606885.jpg?v=1604910230350", style="width: 25rem;")
       .col.m-auto
         h3.py-3 Login
+        a(href="/users/addUser" style="text-decoration: none;") Signup
           if errors
            each error in errors
             .alert.alert-danger= error

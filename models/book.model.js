@@ -3,8 +3,11 @@ var mongoose = require('mongoose');
 var bookSchema = new mongoose.Schema({
   title: String,
   description: String,
-  coverUrl: String
-}, { versionKey: false });
+  coverUrl: {
+    type: String,
+    default: "https://res.cloudinary.com/dgp8yjtbi/image/upload/v1604846973/tl4dmqn8fbbcreimjtn3.jpg"
+  } 
+});
 
 bookSchema.index({title: 'text'});
 

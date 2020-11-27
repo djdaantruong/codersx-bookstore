@@ -19,10 +19,11 @@ var authRoute = require('./routes/auth.route');
 var authMiddleware = require('./middlewares/auth.middleware');
 
 var db = require("./db.js");
+const config = require('./config/key');
 
 var app = express();
 
-mongoose.connect(process.env.mongoURI, {
+mongoose.connect(config.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -31,7 +32,7 @@ mongoose.connect(process.env.mongoURI, {
   .catch(err => console.error(err));
 
 app.set("view engine", "pug");
-app.set("views", "./views");
+app.set("views", "views");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,11 +40,12 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(express.static("public"));
 
-app.get("/", function(req, res){
-	res.render('home');
+app.get("/", (req, res) => {
+  res.render('home');
+  // res.json({"Hello": "I'm happy"});
 });
 
-app.use("/books", authMiddleware.requireAuth, bookRoute);
+app.use("/books", bookRoute);
 app.use("/users", authMiddleware.requireAuth, userRoute);
 app.use("/transaction", authMiddleware.requireAuth, transactionRoute);
 app.use("/products", productRoute);
@@ -54,6 +56,8 @@ app.use('/auth', authRoute);
 app.use(csurf({ cookie: true}));
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+var port = process.env.PORT || 5000
+
+var listener = app.listen(port, () => {
+  console.log(`Your app is listening on port ${port}`);
 });

@@ -31,15 +31,10 @@ module.exports.getAddUser = (req, res) => {
 };
 
 module.exports.postAddUser = async (req, res) => {
-  if (!req.file) {
-    var result = await cloudinary.uploader.upload(
-      "https://res.cloudinary.com/dgp8yjtbi/image/upload/v1604846973/tl4dmqn8fbbcreimjtn3.jpg"
-    );
-  } else {
+  if (req.file) {
     var result = await cloudinary.uploader.upload(req.file.path);
+    req.body.avatarUrl = result.url;
   }
-  
-  req.body.avatarUrl = result.url;
   
   await User.create(req.body);
   

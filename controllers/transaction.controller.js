@@ -11,25 +11,20 @@ module.exports.seeTransaction = async (req, res) => {
   var user = await User.findById(req.signedCookies.userId);
   var transactions = await Transaction.find();
 
-  var matchedTransactions = await transactions.filter(Transaction => {
-    return Transaction.userId == user.id;
-  })
-  console.log(user.isAdmin);
-  
-  if(!user.isAdmin){
+  if(user.isAdmin){
     res.render("transaction/seeTransaction", {
-      transactions: matchedTransactions,
-      pageQuantity: Math.floor(matchedTransactions.length / perPage + 1)
+      transactions: transactions
     });
-    console.log(matchedTransactions);
+    return;
   } else {
+    var matchedTransactions = await transactions.filter(Transaction => {
+      return Transaction.userId == user.id;
+    })
+
     res.render("transaction/seeTransaction", {
-      transactions: transactions,
-      pageQuantity: Math.floor(transactions.length / perPage + 1)
+      transactions: matchedTransactions
     });
-    console.log(transactions);
   }
-  console.log(user.isAdmin);
 };
 
 module.exports.searchTransaction = async (req, res) => {
@@ -65,6 +60,12 @@ module.exports.postCreate = async (req, res) => {
   res.redirect("/transaction/seeTransaction");
 };
 
+module.exports.delete = async (req, res) => {
+  await Transaction.findByIdAndDelete(req.params.id)
+
+  res.redirect("/transaction/seeTransaction");
+};
+
 module.exports.isComplete = async (req, res) => {
   let transaction = await Transaction.findById(req.params.id);
   
@@ -72,3 +73,4 @@ module.exports.isComplete = async (req, res) => {
 
   res.redirect("/transaction/seeTransaction");
 };
+

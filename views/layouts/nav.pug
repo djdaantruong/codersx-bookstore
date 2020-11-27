@@ -6,11 +6,7 @@ nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarNav.collapse.navbar-collapse
-      ul.navbar-nav.ml-auto
-        li
-          if user
-            img.border.border-secondary.rounded-circle.mr-2(src=user.avatarUrl, alt='avatar', width='32')
-            a.font-weight-bold(href='/profile/' + user.id, style="text-decoration: none; color: #fff")= user.name
+      ul.navbar-nav.mr-auto
         li.nav-item
           a.nav-link(href='/books/see') Books
         li.nav-item
@@ -19,18 +15,17 @@ nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
           a.nav-link(href='/transaction/seeTransaction') Transactions
         li.nav-item
           a.nav-link(href='/cart') Cart
+      ul.navbar-nav.ml-auto
+        li
+          if user
+            img.border.border-secondary.rounded-circle(src=user.avatarUrl, alt='avatar', width='32')
         li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            | Profile
-          .dropdown-menu(aria-labelledby='navbarDropdown')
-            a.dropdown-item(href='/books/see') Books
-            a.dropdown-item(href='/users/seeUser') User
-            a.dropdown-item(href='/transaction/seeTransaction') Transactions
-            a.dropdown-item(href='/products/') Products
-            a.dropdown-item(href='/transfer/create') Transfer
-            .dropdown-divider
-            a.dropdown-item(href='auth/loginUser') Login
-            a.dropdown-item(href='#') Logout
+          if user
+            a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= user.name
+            .dropdown-menu(aria-labelledby='navbarDropdown')
+              a.dropdown-item(href='/profile/' + user.id) Profile
+              a.dropdown-item(href='/transfer/create') Transfer
+              a.dropdown-item(href='#') Logout
       
           
       

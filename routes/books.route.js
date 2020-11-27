@@ -1,17 +1,28 @@
-var controllerBook = require("../controllers/books.controller")
+var controllerBook = require("../controllers/books.controller");
 var express = require("express");
 var multer  = require('multer');
 var upload = multer({ dest: './public/uploads/' });
 
 var router = express.Router();
 
+// router.get("/see", (req, res, next) => {
+//     try {
+//         var a;
+//         a.b();
+//     } catch (error) {
+//         res.render("500");
+//      }
+//     },
+//     controllerBook.see
+// );
+
 router.get("/see", controllerBook.see);
 
-router.get('/search', controllerBook.searchBook);
+router.get("/search", controllerBook.searchBook);
 
-router.get('/add', controllerBook.getAdd);
+router.get("/add", controllerBook.getAdd);
 
-router.post("/add", controllerBook.postAdd);
+router.post("/add", upload.single('coverUrl'), controllerBook.postAdd);
 
 router.get("/:id/update", controllerBook.getUpdate);
 

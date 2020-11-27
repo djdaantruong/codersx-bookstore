@@ -12,4 +12,6 @@ router.post("/create", controllerTransaction.postCreate);
 
 router.get("/:id/complete", controllerTransaction.isComplete);
 
+router.get("/:id/delete", controllerTransaction.delete);
+
 module.exports = router;

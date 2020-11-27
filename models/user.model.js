@@ -6,7 +6,10 @@ var userSchema = new Schema({
   email: String,
   password: String,
   isAdmin: String,
-  avatarUrl: String,
+  avatarUrl: {
+    type: String,
+    default: "https://res.cloudinary.com/dgp8yjtbi/image/upload/v1604846973/tl4dmqn8fbbcreimjtn3.jpg"
+  },
   wrongLoginCount: String
 });
 
