@@ -19,7 +19,7 @@ var authRoute = require('./routes/auth.route');
 var authMiddleware = require('./middlewares/auth.middleware');
 
 var db = require("./db.js");
-const config = require('./config/key');
+var config = require('./config/key');
 
 var app = express();
 
