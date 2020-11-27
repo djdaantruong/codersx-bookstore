@@ -23,6 +23,8 @@ const config = require('./config/key');
 
 var app = express();
 
+var port = process.env.PORT || 5000
+
 mongoose.connect(config.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -54,9 +56,6 @@ app.use("/profile", authMiddleware.requireAuth, profileRoute);
 app.use("/transfer", authMiddleware.requireAuth, transferRoute);
 app.use('/auth', authRoute);
 app.use(csurf({ cookie: true}));
-
-// listen for requests :)
-var port = process.env.PORT || 5000
 
 var listener = app.listen(port, () => {
   console.log(`Your app is listening on port ${port}`);
