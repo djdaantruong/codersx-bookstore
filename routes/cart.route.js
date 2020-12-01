@@ -1,25 +1,16 @@
-var express = require("express");
-
-var controller = require("../controllers/cart.controller");
+var controllerCart = require("../controllers/cart.controller");
 var authMiddleware = require('../middlewares/auth.middleware');
+
+var express = require("express");
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/', controllerCart.index);
 
-router.get('/remove/:id', controller.remove);
+router.get('/add/:bookId', controllerCart.addToCart);
 
-router.get('/hire', authMiddleware.requireAuth, controller.hire);
+router.get('/remove/:bookId', controllerCart.remove);
+
+router.get('/hire', authMiddleware.requireAuth, controllerCart.hire);
 
 module.exports = router;
-
-// var express = require('express');
-
-// var controller = require('../controllers/cart.controller');
-
-// var router = express.Router();
-
-// router.get('/', controller.index);
-// router.get('/add/:productId', controller.addToCart);
-
-// module.exports = router;

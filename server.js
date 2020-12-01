@@ -17,6 +17,7 @@ var transferRoute = require("./routes/transfer.route");
 var authRoute = require('./routes/auth.route');
 
 var authMiddleware = require('./middlewares/auth.middleware');
+var sessionMiddleware = require('./middlewares/session.middleware');
 
 var db = require("./db.js");
 var config = require('./config/key');
@@ -39,6 +40,7 @@ app.set("views", "views");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(sessionMiddleware);
 
 app.use(express.static("public"));
 

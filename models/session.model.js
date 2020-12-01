@@ -1,13 +1,16 @@
 var mongoose = require("mongoose");
 
-var bookSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  coverUrl: String
-});
-
 var sessionSchema = new mongoose.Schema({
-  cart: [bookSchema]
+  cart: [
+    {
+      bookId: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Book' 
+      },
+      title: String,
+      quantity: Number
+    }
+  ]
 });
 
 const Session = mongoose.model("Session", sessionSchema, "sessions");

@@ -4,3 +4,17 @@ block nav
 block content
 
   h2.text-center.mt-4 Your cart
+    .container.mt-4
+      table.table
+        thead.thead-light
+          tr
+            th.text Title
+            th.text-center Action
+          each book in cart
+            tr
+              td.text= book.title
+              td.text-center
+                .btn-group.btn-group-sm
+                  a.btn.btn-outline-danger(href='/cart/remove/' + book.id) Remove
+                  
+      a.btn.btn-success(href='/cart/hire') Hire

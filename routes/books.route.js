@@ -24,6 +24,8 @@ router.get("/add", controllerBook.getAdd);
 
 router.post("/add", upload.single('coverUrl'), controllerBook.postAdd);
 
+// router.get("/:id/add", controllerBook.addToCart);
+
 router.get("/:id/update", controllerBook.getUpdate);
 
 router.post("/update", controllerBook.postUpdate);
